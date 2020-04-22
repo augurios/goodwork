@@ -24,3 +24,4 @@ public/js/**/*.js
 !public/js/manifest.js
 !public/js/*/*.min.js
 public/plugins
+.DS_Store
