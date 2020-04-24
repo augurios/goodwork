@@ -5,6 +5,7 @@
 /.idea
 Homestead.json
 Homestead.yaml
+.env
 .phpintel
 npm-debug.log
 /.phpcomplete_extended
@@ -24,3 +25,4 @@ public/js/**/*.js
 !public/js/*/*.min.js
 public/plugins
 .DS_Store
+.env
