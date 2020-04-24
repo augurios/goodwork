@@ -52,6 +52,7 @@ return [
     */
     'route_to_file' => [
         '/'                  => 'home',
+        'login'              => 'login',
         'projects/{project}' => 'project',
         'teams/{team}'       => 'project',
         'offices/{office}'   => 'project',

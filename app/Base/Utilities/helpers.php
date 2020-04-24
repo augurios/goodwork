@@ -22,7 +22,7 @@ if (! function_exists('get_locale')) {
     {
         $user = auth()->user();
 
-        return $user->lang ?? 'en';
+        return $user->lang ?? 'es-CR';
     }
 }
 

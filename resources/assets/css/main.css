@@ -77,3 +77,11 @@ html {
  .message-box-max {
      max-width: calc(100vw - 2rem);
  }
+
+ .w-9 {
+    width: 2.2rem;
+}
+
+.h-9 {
+    height: 2.2rem;
+}
