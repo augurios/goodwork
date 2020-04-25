@@ -24,7 +24,7 @@
         </label>
       </p>
       <p class="py-4">
-        <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white text-xl font-medium py-2 px-4 rounded">{{ 'LOGIN' | localize }}</button>
+        <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white text-xl font-medium py-2 px-4 rounded">{{ 'Login' | localize }}</button>
       </p>
       <a href="password/reset" class="no-underline text-indigo-500 text-sm">{{ 'Forgot Your Password?' | localize }}</a>
     </form>
