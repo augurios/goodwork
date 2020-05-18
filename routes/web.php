@@ -261,3 +261,18 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
 
     Route::get('check-for-update', [AboutController::class, 'checkForUpdate']);
 });
+/**********************************
+        Link
+ **********************************/
+
+Route::get('/links', [LinkController::class, 'index']);
+
+Route::post('/links', [LinkController::class, 'store']);
+
+Route::put('/links', [LinkController::class, 'update']);
+
+Route::delete('/links/{link}', [LinkController::class, 'delete']);
+
+Route::get('/links/tags', [LinkController::class, 'getLinkTags']);
+
+Route::post('/links/search', [LinkController::class, 'searchLinks']);

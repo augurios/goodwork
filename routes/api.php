@@ -143,4 +143,18 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::get('activities', [ActivityController::class, 'index']);
 
     // Settings
+
+    // Links
+
+    Route::get('/links', [LinkController::class, 'index']);
+
+    Route::post('/links', [LinkController::class, 'store']);
+
+    Route::put('/links', [LinkController::class, 'update']);
+
+    Route::delete('/links/{link}', [LinkController::class, 'delete']);
+
+    Route::get('/links/tags', [LinkController::class, 'getLinkTags']);
+
+    Route::post('/links/search', [LinkController::class, 'searchLinks']);
 });
