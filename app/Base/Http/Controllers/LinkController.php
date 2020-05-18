@@ -13,7 +13,7 @@ class LinkController extends Controller
     public function index()
     {
         $links = Link::all();
-    $links->load('tags:label,link_id','user');
+        $links->load('tags:label,link_id,id','user');
         
         return response()->json([
             'status'     => 'success',
@@ -29,11 +29,12 @@ class LinkController extends Controller
                 'title'         => $request->title,
                 'url'           => $request->url,
                 'phone'         => $request->phone, 
+                'email'         => $request->email, 
                 'description'   => $request->description, 
                 'user_id'       => auth()->user()->id,
             ]);
 
-            $link->tags()->attach($request->labels);
+            $link->tags()->attach($request->tags);
 
             $link->load('tags:tag_id,label');
 
@@ -54,10 +55,11 @@ class LinkController extends Controller
         $link->update([
             'title'         => $request->title,
             'url'           => $request->url,
-            'phone'         => $request->phone, 
+            'phone'         => $request->phone,
+            'email'         => $request->email, 
             'description'   => $request->description, 
         ]);
-        $link->tags()->sync($request->labels);
+        $link->tags()->sync($request->tags);
         $link->load('tags:label','user');
 
         return response()->json([
@@ -68,14 +70,18 @@ class LinkController extends Controller
     }
 
     public function delete(Link $link)
-    {   
-        $link->tags()->sync([]);
-        $link->delete();
+    { 
+        try {  
+            $link->tags()->sync([]);
+            $link->delete();
 
-        return response()->json([
-            'status'  => 'success',
-            'message' => localize('misc.The link has been deleted'),
-        ]);
+            return response()->json([
+                'status'  => 'success',
+                'message' => localize('misc.The link has been deleted'),
+            ]);
+        } catch (Exception $exception) {
+            return $this->errorResponse($exception->getMessage());
+        }
     }
 
     // tags controllers
@@ -114,7 +120,7 @@ class LinkController extends Controller
             })->get();
         }
     
-        $links->load('tags:label,link_id','user');
+        $links->load('tags:label,link_id,id','user');
         return response()->json([
             'status'     => 'success',
             'links'     => $links,

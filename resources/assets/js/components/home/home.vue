@@ -62,16 +62,13 @@
       </a>
     </div>
     <div class="h-16"></div>
-    <links-modal-form ref="linkform" :form-shown="true" :tasks="[]" @close="function(){}"></links-modal-form>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import linksModalForm from './../partials/linksModalForm.vue'
 
 export default {
-  components: {linksModalForm},
   props: {
     activeTab: {
       required: true,

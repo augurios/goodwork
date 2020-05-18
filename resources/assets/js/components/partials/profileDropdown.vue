@@ -16,6 +16,12 @@
       </span>
       {{ 'Admin' | localize }}
     </a>
+    <a name="providers-menu" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium no-underline block" @click="showProviders">
+      <span class="w-6 inline-block">
+        <font-awesome-icon :icon="faUser" class="pr-1 font-regular"></font-awesome-icon>
+      </span>
+      {{ 'Providers' | localize }}
+    </a>
     <a name="timer-menu" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium no-underline block" @click="showTimer">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faStopwatch" class="pr-1 font-regular"></font-awesome-icon>
@@ -120,6 +126,9 @@ export default {
     },
     showTimer (event) {
       this.setCurrentComponent('timer')
+    },
+    showProviders (event) {
+      this.setCurrentComponent('providers')
     }
   }
 }

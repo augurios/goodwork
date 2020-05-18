@@ -25,9 +25,10 @@ class ValidateLinkCreation extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'url' => 'url|max:255',
-            'description' => 'max:255',
-            'phone' => 'required|max:20'
+            'url' => 'nullable|url|max:255',
+            'phone' => 'required|max:20',
+            'email' => 'nullable|email|max:255',
+            'description' => 'nullable|max:255'
         ];
     }
 }

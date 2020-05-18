@@ -5,7 +5,7 @@
     <div class="mb-1">
       <div class="text-gray-900 font-bold text-xl mb-2">{{ link.title }}</div>
       <div class="bg-white flex flex-row flex-wrap justify-start py-2 pb">
-        <div v-if="!link.tags" class="text-gray-700">
+        <div v-if="link.tags.length === 0" class="text-gray-700">
           {{ "No Tags" | localize }}
         </div>
         <div
@@ -17,11 +17,12 @@
           {{ tag.label }}
         </div>
       </div>
-      <p class="text-gray-700 text-base">
+      <p  v-if="link.url"  class="text-gray-700 text-base">
         <a :href="link.url">{{ link.url }}</a>
       </p>
       <p class="text-gray-700 text-base mb-2">{{ link.phone }}</p>
-      <p class="text-gray-700 text-base mb-2">{{ link.description }}</p>
+      <p v-if="link.email" class="text-gray-700 text-base mb-2">{{ link.email }}</p>
+      <p v-if="link.description" class="text-gray-700 text-base mb-2"><em>{{ link.description }}</em></p>
       <p v-if="link.user" class="text-gray-700 text-xs">Created by {{ link.user.name }}</p>
 
       <div class="bg-white flex flex-row flex-wrap justify-start py-2 pb">

@@ -10,6 +10,7 @@ $factory->define(Link::class, function (Faker $faker) {
         'title' => substr($faker->sentence(2), 0, -1),
         'url' => $faker->url,
         'phone' => $faker->tollFreePhoneNumber,
+        'email' => $faker->email,
         'description' => $faker->paragraph,
         'user_id' => factory(App\Base\Models\User::class)->create()->id,
     ];

@@ -17,6 +17,7 @@ class Link extends Model
         'title', 
         'url', 
         'phone', 
+        'email',
         'description',
         'user_id',
         'link_tags'
