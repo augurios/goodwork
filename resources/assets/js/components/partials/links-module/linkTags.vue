@@ -25,7 +25,7 @@
           </div>
           <div class="mx-2 w-64 bg-white">
             <div v-if="tagSuggestionShown && availableTags.length !== 0" class="shadow-md border py-1 rounded-b">
-              <div @click="addTag(tag)" v-for="tag in availableTags" class="px-4 py-2 cursor-pointer -mt-1 hover:bg-indigo-400 hover:text-white">
+              <div @click="addTag(tag)" v-for="tag in availableTags" :key="tag.id" class="px-4 py-2 cursor-pointer -mt-1 hover:bg-indigo-400 hover:text-white">
                 {{ tag.label | localize }}
               </div>
             </div>

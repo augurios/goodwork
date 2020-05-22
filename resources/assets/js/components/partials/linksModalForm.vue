@@ -67,13 +67,17 @@ export default {
     isEdit: false,
     linkForm: false,
   }),
-  mounted: function() {
-    this.loadLinkList();
-  },
   computed: {
     ...mapState({
       currentComponent: state => state.dropdown.currentComponent,
     })
+  },
+  watch: {
+    currentComponent: function (value) {
+      if (value) {
+        this.loadLinkList();
+      }
+    }
   },
   methods: {
     ...mapActions([

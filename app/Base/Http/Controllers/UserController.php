@@ -94,4 +94,14 @@ class UserController extends Controller
     {
         return (auth()->user()->username !== $username) && User::where('username', $username)->exists();
     }
+
+    public function searchUsers(Request $request)
+    {   
+        $users = User::where('name', 'LIKE', '%'.$request->name.'%')->orWhere('username', 'LIKE', '%'.$request->name.'%')->get(['id','username','name','avatar']);
+        
+        return response()->json([
+            'status'     => 'success',
+            'users'     => $users,
+        ]);
+    }
 }

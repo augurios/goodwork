@@ -14,9 +14,13 @@
         :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'teams'), 'cursor-pointer': (currentView != 'teams')}">
         {{ 'Teams' | localize }}
       </span>
-      <span @click="setActiveView('offices')" class="mr-4 sm:mr-8"
+      <!-- <span @click="setActiveView('offices')" class="mr-4 sm:mr-8"
         :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'offices'), 'cursor-pointer': (currentView != 'offices')}">
         {{ 'Offices' | localize }}
+      </span> -->
+      <span @click="setActiveView('tickets')" class="mr-4 sm:mr-8"
+        :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'tickets'), 'cursor-pointer': (currentView != 'tickets')}">
+        {{ 'Atención VBG' | localize }}
       </span>
     </div>
   </div>
@@ -25,6 +29,7 @@
     <projects v-if="currentView === 'projects'"></projects>
     <teams v-if="currentView === 'teams'"></teams>
     <offices v-if="currentView === 'offices'"></offices>
+    <tickets v-if="currentView === 'tickets'"></tickets>
   </div>
 
   <project v-if="currentView === 'project'"></project>
@@ -42,10 +47,11 @@ import offices from './offices.vue'
 import project from './../projects/single.vue'
 import team from './../teams/single.vue'
 import office from './../offices/single.vue'
+import tickets from './../partials/tickets-module/ticketsBoard.vue'
 
 export default {
   components: {
-    home, projects, teams, offices, project, team, office
+    home, projects, teams, offices, project, team, office, tickets
   },
 
   created () {
@@ -60,7 +66,7 @@ export default {
       resourceName: state => state.resourceName
     }),
     showHome () {
-      return ['home', 'projects', 'teams', 'offices'].includes(this.currentView)
+      return ['home', 'projects', 'teams', 'offices','tickets'].includes(this.currentView)
     },
   },
 
@@ -107,8 +113,11 @@ export default {
       this.setCurrentView('offices')
       this.getOffices()
     },
+    getAllTickets (){
+      this.setCurrentView('tickets')
+    },
     loadResource (groupType, groupId = null) {
-      if (['projects', 'teams', 'offices'].includes(groupType)) {
+      if (['projects', 'teams', 'offices', 'tickets'].includes(groupType)) {
         switch (groupType) {
           case 'projects':
             this.getAllProjects()
@@ -118,6 +127,9 @@ export default {
             break;
           case 'offices':
             this.getAllOffices()
+            break;
+          case 'tickets':
+            this.getAllTickets()
             break;
           default:
             break;

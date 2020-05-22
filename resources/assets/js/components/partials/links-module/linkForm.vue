@@ -26,20 +26,20 @@
         </div>
         <!-- Phone -->
         <div>
-          <label class="text-sm text-gray-600 px-8" for="cycle">
+          <label class="text-sm text-gray-600 px-8" for="link-phone">
               {{ 'Phone' | localize }}
           </label>
           <div class="flex flex-row items-center mx-8 py-2 relative">
-            <input v-model="newLink.phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="link-title" type="text" placeholder="Telefono" />
+            <input v-model="newLink.phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="link-phone" type="text" placeholder="Telefono" />
           </div>
         </div>
         <!-- Email -->
         <div>
-          <label class="text-sm text-gray-600 px-8" for="cycle">
+          <label class="text-sm text-gray-600 px-8" for="link-email">
               {{ 'Email' | localize }}
           </label>
           <div class="flex flex-row items-center mx-8 py-2 relative">
-            <input v-model="newLink.email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="link-title" type="email" placeholder="Correo" />
+            <input v-model="newLink.email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="link-email" type="email" placeholder="Correo" />
           </div>
         </div>
       </div>

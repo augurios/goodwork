@@ -139,6 +139,19 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /**********************************
+        CommentTicket
+ **********************************/
+
+Route::get('/tickets/comments', [CommentTicketController::class, 'index']);
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/tickets/comments', [CommentTicketController::class, 'store']);
+
+    Route::delete('/tickets/comments/{comment}', [CommentTicketController::class, 'delete']);
+});
+
+
+/**********************************
     Cycle
  **********************************/
 
@@ -154,6 +167,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('categories', [CategoryController::class, 'index']);
 
     Route::post('categories', [CategoryController::class, 'store']);
+
+    /**********************************
+        Subject
+     **********************************/
+
+    Route::get('subjects', [SubjectController::class, 'index']);
+
+    Route::post('subjects', [SubjectController::class, 'store']);
 
     /**********************************
         Roadmap
@@ -210,6 +231,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('users/{user}/profile', [UserProfileController::class, 'update']);
 
     Route::post('users/{user}/avatar', [UserAvatarController::class, 'store']);
+    
+    Route::post('/users/search', [UserController::class, 'searchUsers']);
 
     /**********************************
         Github Service

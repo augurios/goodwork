@@ -76,6 +76,14 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::delete('/comments/{comment}', [CommentController::class, 'delete']);
 
+    // CommentTicket
+
+    Route::get('/tickets/comments', [CommentTicketController::class, 'index']);
+
+    Route::post('/tickets/comments', [CommentTicketController::class, 'store']);
+
+    Route::delete('/tickets/comments/{comment}', [CommentTicketController::class, 'delete']);
+
     // Cycle
 
     Route::get('cycles', [CycleController::class, 'index']);
@@ -87,6 +95,14 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::get('categories', [CategoryController::class, 'index']);
 
     Route::post('categories', [CategoryController::class, 'store']);
+
+    /**********************************
+        Subject
+     **********************************/
+
+    Route::get('subjects', [SubjectController::class, 'index']);
+
+    Route::post('subjects', [SubjectController::class, 'store']);
 
     // Roadmap
 
@@ -127,6 +143,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::put('users/{user}/profile', [UserProfileController::class, 'update']);
 
     Route::post('users/{user}/avatar', [UserAvatarController::class, 'store']);
+    
+    Route::post('/users/search', [UserController::class, 'searchUsers']);
 
     // Github Service
 

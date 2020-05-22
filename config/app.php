@@ -200,6 +200,7 @@ return [
          */
         App\Authorization\AuthorizationServiceProvider::class,
         App\Discussion\DiscussionServiceProvider::class,
+        App\Ticket\TicketServiceProvider::class,
         App\Project\ProjectServiceProvider::class,
         App\Office\OfficeServiceProvider::class,
         App\Team\TeamServiceProvider::class,
