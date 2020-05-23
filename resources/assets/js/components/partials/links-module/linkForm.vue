@@ -48,7 +48,7 @@
           {{ 'Notes' | localize }}
         </label>
         <div class="py-2">
-          <textarea v-model="newLink.description" class="appearance-none block w-full text-gray-800 border border-gray-200 rounded py-3 px-4 resize-none" :placeholder="$options.filters.localize('Description')" name="description" rows="2"></textarea>
+          <textarea v-model="newLink.description" class="appearance-none block w-full text-gray-800 border border-gray-200 rounded py-3 px-4 resize-none" :placeholder="$options.filters.localize('Notes')" name="description" rows="2"></textarea>
         </div>
       </div>
       <div v-if="enabled" class="px-8 py-4 bg-white">
@@ -143,7 +143,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .calling {
   opacity: 0.5;
   pointer-events: none;

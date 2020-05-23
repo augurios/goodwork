@@ -175,4 +175,14 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::get('/links/tags', [LinkController::class, 'getLinkTags']);
 
     Route::post('/links/search', [LinkController::class, 'searchLinks']);
+
+    // Calevents
+
+    Route::get('/calevents', [CaleventController::class, 'index']);
+
+    Route::post('/calevents', [CaleventController::class, 'store']);
+
+    Route::put('/calevents', [CaleventController::class, 'update']);
+
+    Route::delete('/calevents/{event}', [CaleventController::class, 'delete']);
 });

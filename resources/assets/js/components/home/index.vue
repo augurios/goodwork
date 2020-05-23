@@ -1,7 +1,7 @@
 <template>
 <div id="main-container">
   <div v-if="showHome" class="bg-white shadow">
-    <div id="group-menu" class="sm:container sm:mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl flex justify-start mb-8 pb-3 pt-4 text-gray-700">
+    <div id="group-menu" class="sm:container sm:mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl flex justify-start mb-8 pb-3 pt-4 text-gray-700 overflow-auto">
       <span @click="setActiveView('home')" class="mr-4 sm:mr-8"
         :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'home'), 'cursor-pointer': (currentView != 'home')}">
         {{ 'Home' | localize }}
@@ -22,6 +22,10 @@
         :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'tickets'), 'cursor-pointer': (currentView != 'tickets')}">
         {{ 'Atención VBG' | localize }}
       </span>
+      <span @click="setActiveView('calendar')" class="mr-4 sm:mr-8"
+        :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'calendar'), 'cursor-pointer': (currentView != 'calendar')}">
+        {{ 'Calendario' | localize }}
+      </span>
     </div>
   </div>
   <div id="content-container" class="sm:container sm:mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
@@ -30,6 +34,7 @@
     <teams v-if="currentView === 'teams'"></teams>
     <offices v-if="currentView === 'offices'"></offices>
     <tickets v-if="currentView === 'tickets'"></tickets>
+    <EventCalendar v-if="currentView === 'calendar'"></EventCalendar>
   </div>
 
   <project v-if="currentView === 'project'"></project>
@@ -48,10 +53,11 @@ import project from './../projects/single.vue'
 import team from './../teams/single.vue'
 import office from './../offices/single.vue'
 import tickets from './../partials/tickets-module/ticketsBoard.vue'
+import EventCalendar from './../partials/event-calendar/eventCalendar.vue'
 
 export default {
   components: {
-    home, projects, teams, offices, project, team, office, tickets
+    home, projects, teams, offices, project, team, office, tickets, EventCalendar
   },
 
   created () {
@@ -66,7 +72,7 @@ export default {
       resourceName: state => state.resourceName
     }),
     showHome () {
-      return ['home', 'projects', 'teams', 'offices','tickets'].includes(this.currentView)
+      return ['home', 'projects', 'teams', 'offices','tickets','calendar'].includes(this.currentView)
     },
   },
 
@@ -116,8 +122,11 @@ export default {
     getAllTickets (){
       this.setCurrentView('tickets')
     },
+    setCalendar () {
+      this.setCurrentView('calendar')
+    },
     loadResource (groupType, groupId = null) {
-      if (['projects', 'teams', 'offices', 'tickets'].includes(groupType)) {
+      if (['projects', 'teams', 'offices', 'tickets','calendar'].includes(groupType)) {
         switch (groupType) {
           case 'projects':
             this.getAllProjects()
@@ -130,6 +139,9 @@ export default {
             break;
           case 'tickets':
             this.getAllTickets()
+            break;
+          case 'calendar':
+            this.setCalendar()
             break;
           default:
             break;
