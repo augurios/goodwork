@@ -52,6 +52,7 @@ class TicketController extends Controller
     public function delete(Ticket $ticket)
     {
         // $this->authorize('delete', $ticket);
+        $ticket->assignees()->sync([]);
         $ticket->delete();
 
         return response()->json([

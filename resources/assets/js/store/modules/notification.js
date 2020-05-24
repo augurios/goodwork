@@ -24,7 +24,7 @@ export default {
       commit('setMessage', data.message)
       setTimeout(() => {
         commit('togglePopupVisibility', false)
-      }, 4000)
+      }, 5000)
     },
     closeNotification ({ commit }) {
       commit('togglePopupVisibility', false)
