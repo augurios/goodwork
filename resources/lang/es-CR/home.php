@@ -24,4 +24,11 @@ return [
     'Create'                                                   => 'Crear',
     'All Teams'                                                => 'Todos Los Equipos',
     'All Offices'                                              => 'Todas Las Oficinas',
+    'The given data was invalid.'                              => 'Los datos proporcionados no eran válidos.',
+    'Event has been updated'                                   => 'Evento actualizado',
+    'New Event created'                                        => 'Nuevo Evento creado',
+    'The event has been deleted'                               => 'Evento eliminado',
+    'Files uploaded successfully'                              => 'Archivo almacenado',
+    'Comment Ticket has been saved'                            => 'Comentario almacenado.',
+    'Unsupported media type'                                   => 'Tipo de archivo no compatible',
 ];

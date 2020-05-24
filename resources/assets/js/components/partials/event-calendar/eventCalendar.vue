@@ -1,6 +1,6 @@
 <template>
   <div class="relative"  :class="{ calling: isLoading }">
-    <button  @click="toggleEventForm" :disabled="eventModalForm" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded mb-8">Agregar Evento</button>
+    <baseButton  @click="toggleEventForm" btnType="primary" :btnDisabled="eventModalForm" >Agregar Evento</baseButton>
     <Spinner v-if="isLoading" size="w-8 h-8  absolute right-0 mt-2 mr-4" />
     <div v-if="message" class="notification is-success">{{ message }}</div>
     <div class="event-calendar-wrapper bg-white shadow-md rounded mb-16">

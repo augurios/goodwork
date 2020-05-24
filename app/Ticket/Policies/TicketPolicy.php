@@ -19,7 +19,7 @@ class TicketPolicy
      */
     public function list(User $user)
     {
-        return (new Authorization($user))->userIsMemberOfGroup(request('group_type'), request('group_id'));
+        return true;
     }
 
     /**
@@ -31,7 +31,7 @@ class TicketPolicy
      */
     public function view(User $user, Ticket $ticket)
     {
-        return (new Authorization($user))->userHasPermissionTo('view', 'ticket', $ticket->id, true, request('group_type'), request('group_id'));
+        return true;
     }
 
     /**
@@ -43,7 +43,7 @@ class TicketPolicy
      */
     public function update(User $user, Ticket $ticket)
     {
-        return (new Authorization($user))->userHasPermissionTo('update', 'ticket', $ticket->id, true, request('group_type'), request('group_id'));
+        return true;
     }
 
     /**
@@ -55,6 +55,6 @@ class TicketPolicy
      */
     public function delete(User $user, Ticket $ticket)
     {
-        return (new Authorization($user))->userHasPermissionTo('delete', 'ticket', $ticket->id, true, request('group_type'), request('group_id'));
+        return true;
     }
 }

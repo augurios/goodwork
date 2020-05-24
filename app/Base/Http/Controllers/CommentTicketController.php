@@ -53,12 +53,12 @@ class CommentTicketController extends Controller
 
     public function index()
     {
-        $group = $this->getGroupModel();
-        if ($group->notOpenForPublic()) {
-            abort(401);
-        } elseif (auth()->user()) {
-            $this->authorize('view', $group);
-        }
+        // $group = $this->getGroupModel();
+        // if ($group->notOpenForPublic()) {
+        //     abort(401);
+        // } elseif (auth()->user()) {
+        //     $this->authorize('view', $group);
+        // }
         $comments = $this->repository->getAllCommentTicketsWithUser(request('commentable_type'), (int) request('commentable_id'));
 
         return $this->successResponse(null, 'comments', $comments);

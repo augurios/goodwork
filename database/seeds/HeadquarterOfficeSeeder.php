@@ -26,5 +26,17 @@ class HeadquarterOfficeSeeder extends Seeder
         $office = Office::where('name', 'Headquarter')->first();
         (new Authorization($user))->setupDefaultPermissions($office);
         $user->offices()->attach($office->id);
+
+        DB::table('offices')->insert([
+            'name'        => 'Subquarter',
+            'description' => 'Sub office',
+            'created_at'  => Carbon::now(),
+            'updated_at'  => Carbon::now(),
+            'owner_id'    => $user->id,
+        ]);
+
+        $subOffice = Office::where('name', 'Subquarter')->first();
+        (new Authorization($user))->setupDefaultPermissions($subOffice);
+        $user->offices()->attach($subOffice->id);
     }
 }

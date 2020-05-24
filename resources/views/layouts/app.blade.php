@@ -53,7 +53,8 @@
             <message-box></message-box>
             <notification-box></notification-box>
             <timer></timer>
-            <links-modal-form></links-modal-form >
+            <links-modal-form></links-modal-form>
+            <public-Files></public-files>
             @endif
 
 

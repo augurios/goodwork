@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      <comment-ticket-box resourceType="discussion" :resourceId="ticket.id" parentGroupType="office" :parentGroupId="1" :show="ticketDetailsShown" class="px-16"></comment-ticket-box>
+      <comment-ticket-box resourceType="discussion" :resourceId="ticket.id" parentGroupType="office" :parentGroupId="2" :show="ticketDetailsShown" class="px-16"></comment-ticket-box>
     </div>
     <div class="h-16"></div>
   </div>

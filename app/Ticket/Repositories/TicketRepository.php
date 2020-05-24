@@ -57,9 +57,11 @@ class TicketRepository
     public function getAllDraftTicketWithCreator($type, $entityId)
     {
         $query = $this->model->where(['discussionable_type' => $type, 'discussionable_id' => $entityId, 'posted_by' => auth()->user()->id])->with(['creator:id,avatar,name,username', 'subject:id,name'])->get(['id', 'name', 'archived', 'draft', 'content', 'raw_content', 'posted_by', 'created_at', 'subject_id']);
+
         foreach ($query as $ticket){ 
             $ticket['comments'] = count(CommentTicket::where(['commentable_type' => 'discussion', 'commentable_id' => $ticket->id])->get('id'));
         }
+        
         $query->load('assignees');
         return $query;
     }

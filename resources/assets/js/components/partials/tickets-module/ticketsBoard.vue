@@ -5,9 +5,11 @@
   <ticket-details v-if="ticket" :ticketDetailsShown="ticketDetailsShown" :ticket="ticket" :index="index" @close="closeTicketDetails" @deleted="deleteTicket"></ticket-details>
 
   <div v-if="authenticated" class="">
-    <button @click="showCreateTicketForm" class="no-underline p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Abrir Caso' | localize }}</button>
-    <button v-if="showDraftPost" @click="toogleTickets" class="no-underline ml-2 p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Mostrar Propios' | localize }} ({{draftTickets.length}})</button>
-    <button v-else @click="toogleTickets" class="no-underline ml-2 p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Mostrar Asignados' | localize }} ({{publishedTickets.length}})</button>
+    <baseButton @click="showCreateTicketForm"> {{ 'Abrir Caso' | localize }} </baseButton>
+    <baseButton @click="toogleTickets" class="ml-2"> 
+      <span v-if="showDraftPost">{{ 'Mostrar Propios' | localize }} ({{draftTickets.length}})</span>
+      <span v-else>{{ 'Mostrar Asignados' | localize }} ({{publishedTickets.length}})</span>
+    </baseButton>
   </div>
   <div class="flex flex-row flex-wrap items-start md:-mx-4">
     <div @click="showTicketDetails(index, ticket.id)" v-for="(ticket, index) in tickets" :key="ticket.id" class="w-full md:w-88 my-6 md:mx-4 bg-white shadow-md relative ticket-card hover:shadow-xl active:shadow-sm focus:shadow-sm flex flex-col rounded cursor-pointer transition-all duration-300 ease-linear" aria-pressed="true">
@@ -71,7 +73,7 @@ export default {
   },
   data: () => ({
     resource: {
-      id:1
+      id:2
     },
     isLoading: false,
     activeTab: 'tickets',

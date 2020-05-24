@@ -22,6 +22,12 @@
       </span>
       {{ 'Providers' | localize }}
     </a>
+    <a name="files-menu" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium no-underline block" @click="showFiles">
+      <span class="w-6 inline-block">
+        <font-awesome-icon :icon="faFile" class="pr-1 font-regular"></font-awesome-icon>
+      </span>
+      {{ 'Repositorio' | localize }}
+    </a>
     <a name="timer-menu" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium no-underline block" @click="showTimer">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faStopwatch" class="pr-1 font-regular"></font-awesome-icon>
@@ -64,7 +70,8 @@ import {
   faUser,
   faEnvelope,
   faUserMinus,
-  faStopwatch
+  faStopwatch,
+  faFile
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -83,7 +90,8 @@ export default {
     faUser,
     faUserMinus,
     faEnvelope,
-    faStopwatch
+    faStopwatch,
+    faFile
   }),
 
   computed: {
@@ -129,6 +137,9 @@ export default {
     },
     showProviders (event) {
       this.setCurrentComponent('providers')
+    },
+    showFiles (event) {
+      this.setCurrentComponent('files')
     }
   }
 }

@@ -14,7 +14,7 @@ class ValidateCommentTicketCreation extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -27,7 +27,7 @@ class ValidateCommentTicketCreation extends FormRequest
         return [
             'body'             => 'required',
             'commentable_type' => 'required|string',
-            'commentable_id'   => 'required|integer|exists:' . request('commentable_type') . 's,id',
+            'commentable_id'   => 'required|integer|exists:tickets,id',
         ];
     }
 }

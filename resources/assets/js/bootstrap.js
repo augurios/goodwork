@@ -1,5 +1,6 @@
 import Echo from 'laravel-echo'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import baseButton from './components/partials/buttonComponent'
 import ClickOutside from 'vue-click-outside'
 import * as linkify from 'linkifyjs'
 import linkifyElement from 'linkifyjs/element'
@@ -83,5 +84,6 @@ window.Vue.directive('linkify', {
 window.Vue.directive('click-outside', ClickOutside)
 
 window.Vue.component('font-awesome-icon', FontAwesomeIcon)
+window.Vue.component('baseButton', baseButton)
 
 window.EventBus = new Vue()
