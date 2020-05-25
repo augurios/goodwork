@@ -1,6 +1,6 @@
 <template>
   <div class="relative"  :class="{ calling: isLoading }">
-    <baseButton  @click="toggleEventForm" btnType="primary" :btnDisabled="eventModalForm" >Agregar Evento</baseButton>
+    <baseButton  @click="toggleEventForm" btnType="primary" :btnDisabled="eventModalForm" class="mb-8">Agregar Evento</baseButton>
     <Spinner v-if="isLoading" size="w-8 h-8  absolute right-0 mt-2 mr-4" />
     <div v-if="message" class="notification is-success">{{ message }}</div>
     <div class="event-calendar-wrapper bg-white shadow-md rounded mb-16">
@@ -286,7 +286,7 @@ export default {
   opacity: 0.5;
   pointer-events: none;
 }
-button:disabled {
-  opacity: 0.5;
+.theme-default .cv-event {
+  cursor: pointer;
 }
 </style>

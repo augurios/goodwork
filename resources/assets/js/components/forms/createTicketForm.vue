@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import Quill from 'quill'
+import Quill from 'quill';
 import { mapState, mapActions } from 'vuex'
 import imageUpload from 'quill-plugin-image-upload'
 import { faChevronDown,faTimesCircle } from '@fortawesome/free-solid-svg-icons'

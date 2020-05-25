@@ -2,7 +2,7 @@
   <button  
   @click="btnClick" 
   :disabled="btnDisabled" 
-  class="baseButton py-3 px-4 rounded mb-8 no-underline text-base shadow hover:shadow-md active:shadow-xs transition-all duration-100 ease-linear"
+  class="baseButton py-3 px-4 rounded no-underline text-base shadow hover:shadow-lg active:shadow-xs transition-all duration-100 ease-linear"
   :class="{
       'text-white font-medium': btnType,
       'text-indigo-500 bg-white': !btnType,
@@ -43,21 +43,21 @@ export default {
 
 <style>
 .baseButton {
-  transform: scale(1);
   outline: none;
+  opacity: 0.9;
 }
-.baseButton:hover {
-  transform: scale(1.001);
-}
-.baseButton:disabled {
-  opacity: 0.5;
+.baseButton:hover{
+  opacity: 1;
 }
 .baseButton:active {
-  transform: scale(0.98);
   outline: none;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 .baseButton:focus {
   outline: none;
+}
+.baseButton:disabled {
+  opacity: 0.4 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
 }
 </style>

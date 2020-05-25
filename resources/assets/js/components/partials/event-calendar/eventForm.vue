@@ -83,7 +83,7 @@
         <button @click="toggleEventForm" class="border border-gray-400 bg-white text-gray-700 font-medium py-2 px-4 mr-4 rounded">Cerrar</button>
         <button @click="deleteEvent" v-if="event.id" class="border border-red-600 bg-red-600 text-white font-medium py-2 px-4 mr-4 rounded">Eliminar</button>
         
-        <button  @click="saveForm" :disabled="event.title.length === 0 || !event.endDate || !event.startDate" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded">Guardar</button>
+        <baseButton  @click="saveForm" :btnDisabled="event.title.length === 0 || !event.endDate || !event.startDate" btnType="primary">Guardar</baseButton>
       </div>
     </ModalComponent>
 </template>

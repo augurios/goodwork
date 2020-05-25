@@ -5,8 +5,8 @@
   <ticket-details v-if="ticket" :ticketDetailsShown="ticketDetailsShown" :ticket="ticket" :index="index" @close="closeTicketDetails" @deleted="deleteTicket"></ticket-details>
 
   <div v-if="authenticated" class="">
-    <baseButton @click="showCreateTicketForm"> {{ 'Abrir Caso' | localize }} </baseButton>
-    <baseButton @click="toogleTickets" class="ml-2"> 
+    <baseButton @click="showCreateTicketForm" class="mb-8"> {{ 'Abrir Caso' | localize }} </baseButton>
+    <baseButton @click="toogleTickets" class="ml-2 mb-8"> 
       <span v-if="showDraftPost">{{ 'Mostrar Propios' | localize }} ({{draftTickets.length}})</span>
       <span v-else>{{ 'Mostrar Asignados' | localize }} ({{publishedTickets.length}})</span>
     </baseButton>
