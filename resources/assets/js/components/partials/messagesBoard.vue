@@ -14,7 +14,7 @@
     <div class="h-50-vh overflow-auto">
       <div id="message-box" class="">
         <div v-if="currentPage < lastPage">
-            <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="paginationMessage">Load Previous Messages</a>
+            <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="paginationMessage">{{ 'Load Previous Messages' | localize }}</a>
         </div>
         <message v-for="(message, index) in messages" :key="message.body + parseInt(index)" :message="message" :user="user" :index="parseInt(index)" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)"></message>
         <div class="flex flex-row justify-center h-8">
@@ -25,7 +25,7 @@
       </div>
       <div v-if="messages.length === 0" class="flex flex-col justify-center items-center">
         <div class="text-gray-600 text-lg text-center py-8">
-          Talk to your team members about {{ resource.name }}.
+          {{ 'Talk to your team members about' | localize }} {{ resource.name }}.
         </div>
         <img src="/image/work_chat.svg" alt="direct message" class="w-96">
       </div>

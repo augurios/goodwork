@@ -31,4 +31,9 @@ return [
     'Files uploaded successfully'                              => 'Archivo almacenado',
     'Comment Ticket has been saved'                            => 'Comentario almacenado.',
     'Unsupported media type'                                   => 'Tipo de archivo no compatible',
+    'Providers'                                                => 'Proveedores',
+    'Add New'                                                  => 'Agregar Nuevo',
+    'Link has been updated'                                    => 'Proveedor actualizado',
+    'Talk to your team members about'                          => 'Conversa con los miembros de su equipo sobre',
+    'Load Previous Messages'                                   => 'Cargar mensajes anteriores',
 ];

@@ -9,7 +9,7 @@
     <meta name="app-version" content="{{ config('app.version') }}">
     <meta name="last-updated" content="{{ application_last_updated() }}">
 
-    <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
+    <title>Admuni | Colaboracion sensible </title>
 
     <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">  -->
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">

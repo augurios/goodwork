@@ -6,7 +6,7 @@
       <div class="text-gray-900 font-bold text-xl mb-2">{{ link.title }}</div>
       <div class="bg-white flex flex-row flex-wrap justify-start py-2 pb">
         <div v-if="link.tags.length === 0" class="text-gray-700">
-          {{ "No Tags" | localize }}
+          {{ "Sin Categoria" | localize }}
         </div>
         <div
           v-else

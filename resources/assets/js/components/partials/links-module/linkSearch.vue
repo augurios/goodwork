@@ -4,7 +4,7 @@
       <input
         class="w-full h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-lg"
         type="search"
-        placeholder="Search..."
+        placeholder="Buscar Proveedores"
         v-model="searchQuery.name"
         v-on:change="handleSearchQuery(searchQuery)"
       />
@@ -19,7 +19,7 @@
           v-model="searchQuery.tag"
           v-on:change="handleSearchQuery(searchQuery)"
         >
-          <option :value="null">{{ "Filter by Tag" | localize }}</option>
+          <option :value="null">{{ "Filtrar por Etiqueta" | localize }}</option>
           <option v-for="tag in availableTags" :key="tag.id" :value="tag.id">
             {{ tag.label }}
           </option>
