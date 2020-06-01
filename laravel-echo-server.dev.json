@@ -22,6 +22,6 @@
 	"port": "6001",
 	"protocol": "https",
 	"socketio": {},
-	"sslCertPath": "/etc/ssl/certs/goodwork.local.crt",
-	"sslKeyPath": "/etc/ssl/certs/goodwork.local.key"
+	"sslCertPath": "/etc/ssl/certs/dev.admuni.a-valerio.com.crt",
+	"sslKeyPath": "/etc/ssl/certs/dev.admuni.a-valerio.com.key"
 }

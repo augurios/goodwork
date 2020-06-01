@@ -36,4 +36,6 @@ return [
     'Link has been updated'                                    => 'Proveedor actualizado',
     'Talk to your team members about'                          => 'Conversa con los miembros de su equipo sobre',
     'Load Previous Messages'                                   => 'Cargar mensajes anteriores',
+    'New ticket post has been created'                         => 'Nuevo Caso Abierto',
+    'The ticket has been updated'                              => 'Caso actualizado',
 ];
