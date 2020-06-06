@@ -34,6 +34,41 @@ class DirectMessageRepository
         ]);
     }
 
+    public function getAllConvos($userId)
+    {
+        $asSender = $this->model->where('sender_id' , $userId)
+        ->with('user','receiver')
+        ->orderBy('created_at', 'desc')
+        ->get()
+        ->unique('receiver_id');
+        
+        $asReceiver = $this->model->where('receiver_id' , $userId)
+        ->with('user','receiver')
+        ->orderBy('created_at', 'desc')
+        ->get()
+        ->unique('sender_id');
+
+        //TODO
+
+        // $idSender = array();
+            
+        // foreach($asSender as $convo)
+        // {
+        //     $idSender[]=$convo->receiver_id;
+        // }
+
+        // $uniqueConvos = array();
+
+        // foreach($asReceiver as $convo)
+        // {
+        //     if(!in_array($convo->sender_id,$idSender)) {
+        //         $uniqueConvos[]=$convo;
+        //     }
+        // }
+    
+        return [$asSender, $asReceiver];
+    }
+
     public function getAllDirectMessages($senderId, $recieverId)
     {
         return $this->model->where(['sender_id' => $senderId, 'receiver_id' => $recieverId])

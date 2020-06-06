@@ -5,8 +5,8 @@
       {{ getDate(message.created_at) }}
     </div>
   </div>
-  <div class="flex flex-row text-gray-800 p-4 border-t"
-    :class="{'pb-16': last, '': (message.user.id === user.id)}">
+  <div class="flex text-gray-800 p-4 border-t"
+    :class="{'pb-16': last, 'flex-row-reverse': (message.user.id === user.id), 'flex-row': (message.user.id != user.id)}">
     <div class="flex flex-col items-center relative w-10 flex-shrink-0"
       :class="[(message.user.id === user.id) ? 'flex-col-reverse justify-end' : '']">
       <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full"
@@ -14,7 +14,7 @@
       <div v-if="(message.user.id === user.id)" tabindex="0" @keypress.enter="toggleMessageMenu" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
         <font-awesome-icon :icon="faEllipsisH" class="text-gray-500"></font-awesome-icon>
       </div>
-      <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-xl top-0 mt-16 mr-2 py-2 text-white bg-indigo-600 left-0 z-10">
+      <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-xl top-0 mt-16 mr-2 py-2 text-white bg-indigo-600 right-0 z-10">
         <div tabindex="0" @click="editMessage()" @keydown.enter="editMessage()" class="cursor-pointer hover:text-indigo-600 hover:bg-white px-4 py-2">
           Edit
         </div>
@@ -23,17 +23,17 @@
         </div>
       </div>
     </div>
-    <div class="ml-6">
-      <div class="text-xs flex flex-row">
-        <div class="pr-1 font-medium" :class="[(message.user.id === user.id) ? 'text-pink-500' : 'text-blue-500']">
+    <div :class="[(message.user.id === user.id) ? 'mr-6' : 'ml-6']">
+      <div class="text-xs flex" :class="[(message.user.id === user.id) ? 'flex-row-reverse' : 'flex-row']">
+        <div class="font-medium" :class="[(message.user.id === user.id) ? 'text-pink-500 pl-1' : 'text-blue-500 pr-1']">
           {{ message.user.name }}
         </div>
         <div>•</div>
-        <div class="pl-1">
+        <div class="pl-1" :class="[(message.user.id != user.id) ? 'pl-1' : 'pr-1']">
           {{ getTime(message.created_at) }}
         </div>
       </div>
-      <div  class="rounded-lg py-3 pt-0 -mt-2 leading-none text-gray-800 text-base break-all whitespace-pre-line"
+      <div  class="rounded-lg py-3 pt-0 -mt-2 text-gray-800 text-base whitespace-pre-line"
         :class="[(message.user_id === user.id) ? 'rounded-tr-none' : 'rounded-tl-none']" v-linkify >
         {{ message.body }}
       </div>

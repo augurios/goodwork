@@ -1,5 +1,5 @@
 <template>
-<div id="direct-message-box" @focus="clearTitleNotification()" v-if="currentComponent === 'direct-message-box'">
+<div id="direct-message-box" @focus="clearTitleNotification()" v-if="boxActive">
   <div class="fixed top-0 z-40 inset-x-0 mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mt-16 md:mt-24 px-4">
     <div class="bg-white text-lg rounded shadow-lg">
       <div class="bg-white text-2xl text-gray-600 px-8 py-4 rounded-t shadow flex items-center justify-between">
@@ -20,6 +20,7 @@
             v-if="user.id !== authUser.id"
             class="w-10 h-10 -mr-2 flex-none relative"
             :style="{zIndex: users.length - index}"
+            :key="user.id"
           >
             <img
               :class="[(user.id === selectedUser.id) ? 'border-indigo-500' : 'border-white', user.unread_messages_for_auth_user_count > 0 ? 'jelly border-indigo-500' : '']"
@@ -30,51 +31,82 @@
           </div>
         </div>
       </div>
+      
+      <div class="container mx-auto flex flex-wrap">
+        <!-- contact list -->
+        <aside class="w-full md:w-1/4 flex flex-col border-r shadow relative">
+          <div class="flex-col overflow-hidden overflow-y-auto h-128" id="contact-list">
+                <div @click="selectUserMessage(convo.receiver, index)"
+                  v-for="(convo, index) in convos"
+                  class="flex flex-row relative border-b text-gray-800 p-2 cursor-pointer hover:bg-gray-100"
+                  :class="[(convo.receiver.id === selectedUser.id) ? 'bg-gray-200' : '']"
+                  :key="convo.id"
+                >
+                
+                   <img class="w-10 h-10 rounded-full border-2 text-white shadow"
+                    :title="convo.receiver.name"
+                    :src="generateUrl(convo.receiver.avatar)"
+                    :class="[(convo.id === selectedUser.id) ? 'border-indigo-500' : 'border-white', convo.unreadMessages ? 'jelly border-indigo-500' : '']"
+                    >
+                 <div :class="[convo.online ? 'bg-indigo-500' : 'bg-gray-500']" :title="[convo.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white left-1 bottom-1"></div>
 
-      <div class="flex flex-row flex-grow border-t h-60-vh">
-        <div  class="flex-grow overflow-y-auto">
-          <div id="message-box"  v-if="selectedUser.id" class="w-full h-full">
-            <div v-if="messages.length < 1" class="w-full h-full">
-              <div v-if="!loading" class="flex flex-col items-center justify-center">
-                <div class="text-gray-600 text-lg text-center py-16">
-                  No messages yet! Say "Hi" to {{ selectedUser.name }}...
+                    <div class="flex flex-col w-4/5">
+                      <p class="mt-2 ml-3 text-base w-100 overflow-hidden whitespace-no-wrap"
+                      :class="[convo.unreadMessages ? 'font-bold' : '']"
+                      > {{ convo.receiver.name }}
+                        <span v-if="convo.unreadMessages"> ({{ convo.unreadMessages }}) </span>
+                      </p>
+                      <p class="ml-3 text-sm w-100 overflow-hidden whitespace-no-wrap opacity-50">{{ convo.body }} </p>
+                    </div>
+                 </div>
+          </div>
+        </aside>
+
+        <section class="w-full md:w-3/4 flex flex-col h-60-vh">
+          <div class="flex-grow overflow-y-auto">
+              <div id="message-box"  v-if="selectedUser.id" class="w-full min-h-full bg-blue-100">
+                <div v-if="messages.length < 1" class="w-full h-full">
+                  <div v-if="!loading" class="flex flex-col items-center justify-center">
+                    <div class="text-gray-600 text-lg text-center py-16">
+                      No messages yet! Say "Hi" to {{ selectedUser.name }}...
+                    </div>
+                    <img src="/image/dm.svg" alt="direct message" class="w-96">
+                  </div>
                 </div>
-                <img src="/image/dm.svg" alt="direct message" class="w-96">
+                <div v-if="currentPage < lastPage">
+                  <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="loadPrevMessage">Load Previous Messages</a>
+                </div>
+                <message v-for="(message, index) in messages" :key="message.id" :message="message" :user="authUser" :index="parseInt(index)" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)" :direct="true"></message>
+              </div>
+              <div v-else class="flex flex-col items-center justify-center">
+                <div class="text-gray-600 text-lg text-center py-16">
+                  Click a profile picture to see your interactions with that user.
+                </div>
+                <img src="/image/select.svg" alt="direct message" class="w-64">
+              </div>
+          </div>
+          <!-- message box -->
+          <div class="relative text-center p-4 border-t">
+            <div v-if="isDisabled" class="absolute left-0 top-0 rounded-b w-full h-full bg-gray-800 opacity-25"></div>
+            <div class="flex justify-between items-center">
+              <textarea
+                class="static textarea resize-none rounded w-full px-4 pt-2 text-gray-800 bg-white"
+                id="send-direct-message"
+                :style="{height: messageTextareaHeight}"
+                ref="messageTextarea"
+                :placeholder="'write your message here' | localize"
+                rows=1
+                v-model="message"
+                :disabled="isDisabled"
+                @keydown.enter.prevent="sendMessage($event)"></textarea>
+              <div @click="sendMessage" class="bg-indigo-500 rounded-full h-10 w-10 flex justify-center items-center cursor-pointer">
+                <font-awesome-icon :icon="faPaperPlane"
+                  class="items-center text-white text-sm mr-1">
+                </font-awesome-icon>
               </div>
             </div>
-            <div v-if="currentPage < lastPage">
-              <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="loadPrevMessage">Load Previous Messages</a>
-            </div>
-            <message v-for="(message, index) in messages" :key="message.body + parseInt(index)" :message="message" :user="authUser" :index="parseInt(index)" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)" :direct="true"></message>
           </div>
-          <div v-else class="flex flex-col items-center justify-center">
-            <div class="text-gray-600 text-lg text-center py-16">
-              Click a profile picture to see your interactions with that user.
-            </div>
-            <img src="/image/select.svg" alt="direct message" class="w-64">
-          </div>
-        </div>
-      </div>
-
-      <div class="relative text-center p-4 border-t">
-        <div v-if="isDisabled" class="absolute left-0 top-0 rounded-b w-full h-full bg-gray-800 opacity-25"></div>
-        <div class="flex justify-between items-center">
-          <textarea
-            class="static textarea resize-none rounded w-full px-4 pt-2 text-gray-800 bg-white"
-            id="send-direct-message"
-            :style="{height: messageTextareaHeight}"
-            ref="messageTextarea"
-            :placeholder="'write your message here' | localize"
-            rows=1
-            v-model="message"
-            :disabled="isDisabled"
-            @keydown.enter.prevent="sendMessage($event)"></textarea>
-          <div @click="sendMessage" class="bg-indigo-500 rounded-full h-10 w-10 flex justify-center items-center cursor-pointer">
-            <font-awesome-icon :icon="faPaperPlane"
-              class="items-center text-white text-sm mr-1">
-            </font-awesome-icon>
-          </div>
-        </div>
+        </section>
       </div>
     </div>
   </div>
@@ -107,20 +139,18 @@ export default {
     selectedUser: {},
     editing: {},
     faPaperPlane,
-    faTimes
+    faTimes,
+    convos:[],
   }),
 
   created () {
-    axios.get('/unread-direct-messages/users')
-      .then((response) => {
-        this.users = response.data.users
-      })
-      .catch((error) => {
-        console.log(error)
-      })
     this.title = document.title
     this.listen()
     document.addEventListener('visibilitychange', this.clearTitleNotification)
+
+    this.getConvos();
+    
+    
   },
 
   updated () {
@@ -143,7 +173,14 @@ export default {
   computed: {
     ...mapState({
       currentComponent: state => state.dropdown.currentComponent
-    })
+    }),
+    boxActive: function () {
+      var active = this.currentComponent === 'direct-message-box'
+      if (!active) {
+        this.selectedUser = {};
+      }
+      return active;
+    }
   },
 
   methods: {
@@ -152,6 +189,97 @@ export default {
       'showNotification',
       'toggleLoading'
     ]),
+    getConvos() {
+      axios.get('/direct-messages/convos')
+      .then((response) => {
+        console.log('resp.convos',response.data.convos);
+        this.setConvos(response.data.convos);
+        this.getUnread();
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    },
+    getUnread() {
+      axios.get('/unread-direct-messages/users')
+      .then((response) => {
+        this.users = response.data.users
+        this.users.forEach(user => {
+          if(user.unread_messages_for_auth_user_count) {
+            this.getConvoById(user.id).unreadMessages = user.unread_messages_for_auth_user_count; 
+          }
+        });
+        
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    },
+    setConvos(convos) {
+      //TODO: Move this logic to the model repository
+      let senders = this.objectToArray(convos[0]);
+      let senderIds = senders.map(a => a.receiver_id);
+      let uniqueReceivers = [];
+      
+      this.objectToArray(convos[1]).forEach(receiever => {
+        if(!senderIds.includes(receiever.sender_id)) {
+          receiever.receiver = receiever.user;
+          
+          uniqueReceivers.push(receiever);
+        } else {
+          var index = this.getConvoIndex(receiever.sender_id,senders) 
+          if (new Date (senders[index].created_at) < new Date (receiever.created_at)) {
+            senders[index].body = receiever.body;
+            senders[index].created_at = receiever.created_at
+          }
+        }
+      });
+      this.convos = [
+        ...senders,
+        ...uniqueReceivers
+      ];
+      this.sortConvos()
+    },
+    objectToArray (obj) {
+        let properties = Object.keys(obj),
+            finalArr = [];
+        for (let i of properties) {
+            obj[i].online = null;
+            finalArr.push(obj[i]);
+        };
+        return finalArr;
+    },
+    getConvoIndex(id,arr) {
+      return arr ? arr.findIndex(x => x.receiver.id === id) : this.convos.findIndex(x => x.receiver.id === id);
+    },
+    getConvoById(userId) {
+      return this.convos[this.getConvoIndex(userId)] || {};
+    },
+    bumpConvo(receiverId, lastMessage, unreadCount) {
+      var index = this.getConvoIndex(receiverId);
+      var convoUp = this.convos[index];
+
+      if(convoUp) {
+        convoUp.body = lastMessage ? lastMessage : convoUp.body;
+        convoUp.unreadMessages = unreadCount ? convoUp.unreadMessages += unreadCount : convoUp.unreadMessages;
+        this.convos.splice(0, 0, ...this.convos.splice(index, 1));
+      } else {
+        this.convos.unshift({
+          body: lastMessage || '',
+          receiver: this.users[this.users.findIndex(x => x.id === receiverId)],
+          unreadMessages: unreadCount || 0,
+          online: unreadCount ? true : false
+        })
+      }   
+      if (document.getElementById("contact-list")) {
+        var contactsContainer = this.$el.querySelector('#contact-list')
+        contactsContainer = contactsContainer.firstElementChild
+        contactsContainer.scrollIntoView();
+      }
+    },
+    sortConvos() {
+      this.convos.sort((a, b) => {return new Date(b.created_at) - new Date(a.created_at);})
+    },
     scrollToBottom () {
       this.$nextTick(() => {
         if (document.getElementById("message-box")) {
@@ -214,6 +342,8 @@ export default {
           if (response.data.status === 'success') {
             response.data.message.user = user
             this.messages.push(response.data.message)
+            this.scrollToBottom()
+            this.bumpConvo(this.selectedUser.id, msg);
           }
         })
         .catch((error) => {
@@ -243,7 +373,9 @@ export default {
         })
       axios.put('/unread-direct-messages/' + user.id)
         .then((response) => {
-          this.users[index].unread_messages_for_auth_user_count = 0
+          if(this.convos[index]) {
+            this.convos[index].unreadMessages = 0
+          }
           this.toggleLoading(false)
         })
         .catch((error) => {
@@ -306,57 +438,38 @@ export default {
     listen () {
       Echo.join('global')
         .here(users => {
-          this.users = this.users.map(user => {
-            user.online = users.includes(user.id)
-            return user
+          this.convos.forEach(convo => {
+            convo.online = users.includes(convo.receiver.id);
           })
         })
         .joining((userId) => {
-          this.users = this.users.map(user => {
-            if (userId === user.id) {
-              user.online = true
-            }
-            return user
-          })          
+          this.getConvoById(userId).online = true;
         })
         .leaving((userId) => {
-          this.users = this.users.map(user => {
-            if (userId === user.id) {
-              user.online = false
-            }
-            return user
-          })          
+          this.getConvoById(userId).online = false;       
         })
       Echo.private('User.' + this.authUser.id)
         .listen('DirectMessageCreated', event => {
           event.message.user = event.user
-          if (!this.messageBoxShown) {
-            EventBus.$emit('new-direct-message')
-            this.users = this.users.map(user => {
-              if (user.id === event.user.id) {
-                user.unread_messages_for_auth_user_count += 1
-              }
-              return user
-            })
-          } else if (this.selectedUser.id === event.user.id) {
+          if (!this.boxActive) {
+            EventBus.$emit('new-direct-message');
+          } 
+          if (this.selectedUser.id === event.user.id) {
             axios.put('/unread-direct-messages/' + event.user.id)
               .catch((error) => {
                 console.log(error)
               })
+              this.messages.push(event.message)
+              this.bumpConvo(event.user.id,event.message.body);
+              this.scrollToBottom();
           } else if (this.selectedUser.id !== event.user.id) {
-            this.users = this.users.map(user => {
-              if (user.id === event.user.id) {
-                user.unread_messages_for_auth_user_count += 1
-              }
-              return user
-            })
+            this.bumpConvo(event.user.id,event.message.body, 1);
           }
           if (document.hidden) {
             this.unreadMessage += 1
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
-          this.messages.push(event.message)
-          this.scrollToBottom()
+          
         })
     },
     clearTitleNotification () {
@@ -372,6 +485,7 @@ export default {
 <style>
 .jelly {
   animation: jelly 2s infinite;
+  will-change: transform;
 }
 
 @keyframes jelly {

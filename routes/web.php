@@ -188,6 +188,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('direct-messages', [DirectMessageController::class, 'index']);
 
+    Route::get('direct-messages/convos', [DirectMessageController::class, 'indexConvos']);
+
     Route::post('direct-messages', [DirectMessageController::class, 'store']);
 
     Route::put('direct-messages/{directMessage}', [DirectMessageController::class, 'update']);

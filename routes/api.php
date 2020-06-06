@@ -111,6 +111,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     // Direct Message
 
     Route::get('direct-messages', [DirectMessageController::class, 'index']);
+    
+    Route::get('direct-messages/convos', [DirectMessageController::class, 'indexConvos']);
 
     Route::post('direct-messages', [DirectMessageController::class, 'store']);
 

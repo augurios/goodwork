@@ -27,6 +27,23 @@ class DirectMessageController extends Controller
         }
     }
 
+    public function indexConvos(DirectMessageRepository $repository)
+    {
+        try {
+            $messages = $repository->getAllConvos(auth()->user()->id);
+
+            return response()->json([
+                'status'   => 'success',
+                'convos' => $messages,
+            ]);
+        } catch (Exception $exception) {
+            return response()->json([
+                'status'   => 'error',
+                'message'  => $exception->getMessage(),
+            ]);
+        }
+    }
+
     public function store(StoreDirectMessageRequest $request, DirectMessageRepository $repository)
     {
         try {
