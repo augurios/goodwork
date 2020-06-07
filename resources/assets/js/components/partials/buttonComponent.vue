@@ -8,6 +8,7 @@
       'text-indigo-500 bg-white': !btnType,
       'bg-indigo-600' : btnType === 'primary',
       'bg-red-600' : btnType === 'danger',
+      'bg-green-600' : btnType === 'success',
     }"
   >
     <slot></slot>

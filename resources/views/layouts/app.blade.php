@@ -54,6 +54,7 @@
             <notification-box></notification-box>
             <timer></timer>
             <links-modal-form></links-modal-form>
+            <modal-directory></modal-directory>
             <public-Files></public-files>
             @endif
 

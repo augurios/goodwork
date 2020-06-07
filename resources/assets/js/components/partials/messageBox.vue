@@ -13,22 +13,9 @@
           </font-awesome-icon>
         </div>
       </div>
-      <div class="bg-gray-200">
+      <div class="bg-gray-100">
         <div class="flex items-center overflow-x-auto p-2">
-          <div @click="selectUserMessage(user, index)"
-            v-for="(user, index) in users"
-            v-if="user.id !== authUser.id"
-            class="w-10 h-10 -mr-2 flex-none relative"
-            :style="{zIndex: users.length - index}"
-            :key="user.id"
-          >
-            <img
-              :class="[(user.id === selectedUser.id) ? 'border-indigo-500' : 'border-white', user.unread_messages_for_auth_user_count > 0 ? 'jelly border-indigo-500' : '']"
-              class="w-10 h-10 rounded-full border-2 text-white cursor-pointer shadow"
-              :title="user.name"
-              :src="generateUrl(user.avatar)">
-            <div :class="[user.online ? 'bg-indigo-500' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white right-0 bottom-0"></div>
-          </div>
+          <baseButton @click="setCurrentComponent('directory')" btnType="primary">Nuevo Mensaje</baseButton>
         </div>
       </div>
       
@@ -149,7 +136,7 @@ export default {
     document.addEventListener('visibilitychange', this.clearTitleNotification)
 
     this.getConvos();
-    
+    EventBus.$on('openChatMsg', this.handleOpenChat);
     
   },
 
@@ -187,7 +174,8 @@ export default {
     ...mapActions([
       'closeComponent',
       'showNotification',
-      'toggleLoading'
+      'toggleLoading',
+      'setCurrentComponent'
     ]),
     getConvos() {
       axios.get('/direct-messages/convos')
@@ -477,7 +465,11 @@ export default {
         document.title = this.title
         this.unreadMessage = 0
       }
+    },
+    handleOpenChat(user) {
+      this.selectUserMessage(user, this.getConvoIndex(user.id));
     }
+    
   }
 }
 </script>

@@ -11,6 +11,7 @@
         <div class="flex flex-row h-full">
           <notification-dropdown></notification-dropdown>
           <message-dropdown></message-dropdown>
+          <tools-dropdown></tools-dropdown>
           <profile-dropdown></profile-dropdown>
         </div>
       </div>
@@ -23,8 +24,9 @@
   import notificationDropdown from './notificationDropdown'
   import messageDropdown from './messageDropdown'
   import profileDropdown from './profileDropdown'
+  import toolsDropdown from './toolsDropdown'
   export default {
-    components: {notificationDropdown, messageDropdown, profileDropdown},
+    components: {notificationDropdown, messageDropdown, profileDropdown, toolsDropdown},
     data: () => ({
       token: Laravel.csrfToken,
       url: navUrl

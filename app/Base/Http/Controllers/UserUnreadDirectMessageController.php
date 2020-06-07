@@ -11,9 +11,8 @@ class UserUnreadDirectMessageController extends Controller
     {
         try {
             $users = User::where('id', '!=', auth()->user()->id)
-                         ->select(['id', 'name', 'username', 'avatar'])
+                         ->select(['id', 'name', 'username', 'avatar','designation', 'location','email'])
                          ->withCount('unreadMessagesForAuthUser')
-                         ->orderBy('unread_messages_for_auth_user_count', 'desc')
                          ->get();
 
             return response()->json([
