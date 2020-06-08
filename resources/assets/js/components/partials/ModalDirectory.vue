@@ -11,7 +11,7 @@
           
           <div v-for="user in filteredUsers" :key="user.id" class="p-2 md:w-1/2 w-full h-40">
             <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" :src="user.avatar">
+              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" :src="generateUrl(user.avatar)">
               <div class="flex-grow">
                 <h2 class="text-gray-900 title-font font-medium"><a :href="`/users/${user.username}`" class="hover:text-indigo-600"> {{ user.name }} <span class="text-xs">({{ user.username }})</span></a> </h2>
                 <p class="text-gray-500" v-if="user.designation || user.location">{{ user.designation }} | {{ user.location }}</p>

@@ -16,10 +16,10 @@
       </div>
       <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-xl top-0 mt-16 mr-2 py-2 text-white bg-indigo-600 right-0 z-10">
         <div tabindex="0" @click="editMessage()" @keydown.enter="editMessage()" class="cursor-pointer hover:text-indigo-600 hover:bg-white px-4 py-2">
-          Edit
+          Editar
         </div>
         <div tabindex="0" @click="deleteMessage()" @keydown.enter="deleteMessage()" class="cursor-pointer hover:text-indigo-600 hover:bg-white px-4 py-2">
-          Delete
+          Borrar
         </div>
       </div>
     </div>

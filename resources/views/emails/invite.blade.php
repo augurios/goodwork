@@ -1,18 +1,18 @@
 @component('mail::message')
 @if ($company)
-##  {{ Auth::user()->name }} invited you to join Goodwork ({{ $company }})
+##  {{ Auth::user()->name }} Te a invitado a unirte a AdMuni
 @else
-##  {{ Auth::user()->name }} invited you to join Goodwork
+##  {{ Auth::user()->name }} Te a invitado a unirte a AdMuni
 @endif
 
 
-Hi {{ $name }},
+Hola {{ $name }},
 
-**Goodwork** is a simple project management and collaboration tool to help everyone in {{ $company ?? 'a company'}} to stay organized and get work done.
-It's simple and easy! To join click the link below:
+**AdMuni** Es un enfoque sensible al trabajo y colaboración para desarrollo local.
+Haz clic en el siguiente link para crear tu cuenta:
 
 @component('mail::button', ['url' => url('register/' . $token)])
-Join Now
+Crear Cuenta
 @endcomponent
 
 @endcomponent

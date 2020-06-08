@@ -39,7 +39,7 @@ class SendInvitationToRegister extends Mailable
         $setting = Setting::first();
 
         return $this->markdown('emails.invite')
-                    ->subject(Auth::user()->name . ' invited you to join Goodwork')
+                    ->subject(Auth::user()->name . ' Te invito a unirte a AdMuni')
                     ->with([
                         'token'   => $token,
                         'name'    => $request->name,

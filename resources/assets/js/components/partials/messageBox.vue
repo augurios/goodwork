@@ -2,10 +2,10 @@
 <div id="direct-message-box" @focus="clearTitleNotification()" v-if="boxActive">
   <div class="fixed top-0 z-40 inset-x-0 mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mt-16 md:mt-24 px-4">
     <div class="bg-white text-lg rounded shadow-lg">
-      <div class="bg-white text-2xl text-gray-600 px-8 py-4 rounded-t shadow flex items-center justify-between">
+      <div class="bg-white text-2xl text-gray-600 px-8 py-4 rounded-t border-b border-gray-100 flex items-center justify-between">
         <div></div>
         <div>
-          Messages
+          Mensajes
         </div>
         <div @click="hideMessageBox()" class="self-end cursor-pointer">
           <font-awesome-icon :icon="faTimes"
@@ -13,8 +13,8 @@
           </font-awesome-icon>
         </div>
       </div>
-      <div class="bg-gray-100">
-        <div class="flex items-center overflow-x-auto p-2">
+      <div>
+        <div class="flex items-center overflow-x-auto p-2 relative shadow-md z-10">
           <baseButton @click="setCurrentComponent('directory')" btnType="primary">Nuevo Mensaje</baseButton>
         </div>
       </div>
@@ -55,19 +55,19 @@
                 <div v-if="messages.length < 1" class="w-full h-full">
                   <div v-if="!loading" class="flex flex-col items-center justify-center">
                     <div class="text-gray-600 text-lg text-center py-16">
-                      No messages yet! Say "Hi" to {{ selectedUser.name }}...
+                      No hay mensajes aun! Dile "Hola" a {{ selectedUser.name }}...
                     </div>
                     <img src="/image/dm.svg" alt="direct message" class="w-96">
                   </div>
                 </div>
                 <div v-if="currentPage < lastPage">
-                  <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="loadPrevMessage">Load Previous Messages</a>
+                  <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="loadPrevMessage">Cargar mensajes anteriores</a>
                 </div>
                 <message v-for="(message, index) in messages" :key="message.id" :message="message" :user="authUser" :index="parseInt(index)" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)" :direct="true"></message>
               </div>
               <div v-else class="flex flex-col items-center justify-center">
                 <div class="text-gray-600 text-lg text-center py-16">
-                  Click a profile picture to see your interactions with that user.
+                  Elije una conversación.
                 </div>
                 <img src="/image/select.svg" alt="direct message" class="w-64">
               </div>
