@@ -3,9 +3,9 @@
 
     <div class="md:bg-white container md:mx-4 md:mx-auto md:shadow-lg rounded md:mt-32 flex md:flex-row flex-col md:max-w-2xl lg:max-w-4xl justify-between">
         <div class="md:w-1/2 text-center md:flex flex-col items-center px-8 py-4">
-            <p class="text-teal-500 font-bold text-4xl">GOODWORK</p>
-            <p class="text-teal-500 text-xl">@lang('auth.Sensible Approach to Work & Collaboration for Software Teams')</p>
-            <img src="/image/password.svg" alt="work desk" class="pt-4 hidden md:block w-96">
+            <img src="/image/RET-MT01-logos-01.jpg" alt="Admuni Logo" class="pt-8 hidden md:block">
+            <p class="text-indigo-500 font-bold text-4xl md:pt-8">AdMuni</p>
+            <p class="text-indigo-500 text-xl"> Enfoque sensible al trabajo y colaboración para desarrollo local </p>
         </div>
         <div class=""></div>
         <div class="w-full md:bg-indigo-100 md:w-1/2 p-8">
