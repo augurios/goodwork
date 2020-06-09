@@ -5,6 +5,8 @@ import ClickOutside from 'vue-click-outside'
 import * as linkify from 'linkifyjs'
 import linkifyElement from 'linkifyjs/element'
 import mention from 'linkifyjs/plugins/mention'
+import VueCroppie from 'vue-croppie';
+import 'croppie/croppie.css'
 
 mention(linkify)
 
@@ -85,5 +87,7 @@ window.Vue.directive('click-outside', ClickOutside)
 
 window.Vue.component('font-awesome-icon', FontAwesomeIcon)
 window.Vue.component('baseButton', baseButton)
+
+window.Vue.use(VueCroppie);
 
 window.EventBus = new Vue()
