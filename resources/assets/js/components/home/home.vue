@@ -62,17 +62,44 @@
       </a>
     </div>
     <div class="h-16"></div>
+
+    <ModalComponent :showModal="showModal" @close="toggleWelcome"> 
+       <div class="text-2xl text-gray-700 text-center font-semibold px-8 pb-6">
+          <h1 class="w-full bg-gray-100 text-gray-800 text-center rounded pb-3 px-4" > Bienvenid@ a AdMuni Beta Version 0.1</h1>
+      </div>
+      <div class="bg-white p-8">
+        <p class="text-center mb-4">&iexcl;Informaci&oacute;n importante!</p>
+        <p class="mb-4"><strong>AdMuni</strong> es una aplicaci&oacute;n para colaboraci&oacute;n laboral entre gobiernos locales. Actualmente en desarrollo, las caracteristicas y funcionalidades actuales podrian cambiar, la informacion agregada a esta version no sera restaurada.</p>
+        <p class="mb-4">Para reportar errores o enviar sugerencias puede crear una tarea en el proyecto "<a href="/?group_type=project&group_id=2&tool=tasks" class="text-indigo-700">Admuni desarrollo</a>"</p>
+        <p class="mb-4">Cualquier duda puede enviar un mensaje al usuario "Admin".</p>
+        <p>&nbsp;&nbsp;</p>
+      </div>
+      <div class="flex flex-row justify-end pt-6 px-8 bg-gray-100 rounded">
+        <button @click="toggleWelcome" class="border border-gray-400 bg-white text-gray-700 font-medium py-2 px-4 mr-4 rounded">Cerrar</button>
+      </div>
+    </ModalComponent>
+
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import ModalComponent from './../partials/modalComponent'
 
 export default {
+  components: {
+    ModalComponent
+  },
   props: {
     activeTab: {
       required: true,
       type: String
+    }
+  },
+
+  data() {
+    return {
+      showModal: true,
     }
   },
 
@@ -86,6 +113,9 @@ export default {
     dueOn: function (value) {
       return luxon.DateTime.fromSQL(value).toFormat('d LLL')
     },
+    toggleWelcome() {
+      this.showModal = !this.showModal;
+    }
   }
 }
 </script>
