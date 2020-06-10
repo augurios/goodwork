@@ -9,9 +9,9 @@
       <div class="px-8 py-4 bg-white">
         <div v-if="users.length > 0 && !isLoading" class="flex flex-wrap lg:mx-4 xxl:mx-0 overflow-y-auto sm:h-72 lg:h-96">
           
-          <div v-for="user in filteredUsers" :key="user.id" class="p-2 md:w-1/2 w-full h-40">
-            <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" :src="generateUrl(user.avatar)">
+          <div v-for="user in filteredUsers" :key="user.id" class="p-2 md:w-1/2 w-full md:h-40">
+            <div class="h-full md:flex items-center border-gray-200 border p-4 rounded-lg text-center">
+              <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center inline-block md:flex-shrink-0 rounded-full mr-4" :src="generateUrl(user.avatar)">
               <div class="flex-grow">
                 <h2 class="text-gray-900 title-font font-medium"><a :href="`/users/${user.username}`" class="hover:text-indigo-600"> {{ user.name }} <span class="text-xs">({{ user.username }})</span></a> </h2>
                 <p class="text-gray-500" v-if="user.designation || user.location">{{ user.designation }} | {{ user.location }}</p>
@@ -22,7 +22,7 @@
             </div>
           </div>
         </div>
-        <div v-else-if="links.length === 0 && !isLoading" class="sm:h-72 lg:h-96 lg:mx-4 xxl:mx-0">
+        <div v-else-if="users.length === 0 && !isLoading" class="sm:h-72 lg:h-96 lg:mx-4 xxl:mx-0">
           {{ 'No hay resultados' | localize }}
         </div>
         <Spinner v-else size="w-16 h-16" />

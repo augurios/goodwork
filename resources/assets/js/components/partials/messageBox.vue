@@ -15,13 +15,14 @@
       </div>
       <div>
         <div class="flex items-center overflow-x-auto p-2 relative shadow-md z-10">
-          <baseButton @click="setCurrentComponent('directory')" btnType="primary">Nuevo Mensaje</baseButton>
+          <baseButton @click="setCurrentComponent('directory')" class="md:inline-block" :class="{'hidden': selectedUser.username }" btnType="primary">Nuevo Mensaje</baseButton>
+          <h1 v-if="selectedUser.name" class="text-lg text-center font-bold w-full md:hidden"> {{selectedUser.name}}</h1>
         </div>
       </div>
       
       <div class="container mx-auto flex flex-wrap">
         <!-- contact list -->
-        <aside class="w-full md:w-1/4 flex flex-col border-r shadow relative">
+        <aside class="w-full md:w-1/4 flex md:flex flex-col border-r shadow relative" :class="{'hidden': selectedUser.username }">
           <div class="flex-col overflow-hidden overflow-y-auto h-128" id="contact-list">
                 <div @click="selectUserMessage(convo.receiver, index)"
                   v-for="(convo, index) in convos"
@@ -49,7 +50,7 @@
           </div>
         </aside>
 
-        <section class="w-full md:w-3/4 flex flex-col h-60-vh">
+        <section class="w-full md:w-3/4 flex md:flex flex-col h-60-vh" :class="{'hidden': !selectedUser.username }">
           <div class="flex-grow overflow-y-auto">
               <div id="message-box"  v-if="selectedUser.id" class="w-full min-h-full bg-blue-100">
                 <div v-if="messages.length < 1" class="w-full h-full">
@@ -123,7 +124,7 @@ export default {
     title: '',
     unreadMessage: 0,
     users: [],
-    selectedUser: {},
+    selectedUser: null,
     editing: {},
     faPaperPlane,
     faTimes,

@@ -8,14 +8,14 @@
         v-model="searchQuery.name"
         v-on:change="handleSearchQuery(searchQuery)"
       />
-      <div class="relative inline-flex">
-         <div class="relative mr-4">
+      <div class="relative md:inline-flex">
+         <div class="relative md:mr-4 mb-2">
           <font-awesome-icon
             :icon="faChevronDown"
             class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
           ></font-awesome-icon>
           <select
-            class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+            class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none w-full"
             v-model="searchQuery.location"
             v-on:change="handleSearchQuery(searchQuery)"
           >
@@ -31,7 +31,7 @@
             class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
           ></font-awesome-icon>
           <select
-            class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+            class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none w-full"
             v-model="searchQuery.position"
             v-on:change="handleSearchQuery(searchQuery)"
           >
