@@ -1,6 +1,6 @@
 <template>
-<div id="tools-dropdown-container" class="pr-6 h-full flex items-center cursor-pointer">
-  <div id="tools-dropdown" class="text-indigo-500  text-base no-underline cursor-pointer" @click="toggleToolsDropdown" v-click-outside="hideToolsDropdown">
+<div id="tools-dropdown-container" class="pr-6 h-full flex items-center cursor-pointer" v-click-outside="hideToolsDropdown">
+  <div id="tools-dropdown" class="text-indigo-500  text-base no-underline cursor-pointer" @click="toggleToolsDropdown" >
     <font-awesome-icon :icon="faTools" class="font-bold text-xl"></font-awesome-icon>
   </div>
   <div v-if="currentComponent === 'tools-dropdown'" id="tools-menu" class="absolute bg-white w-48 -ml-32 mr-2 py-1 shadow-lg rounded z-50" style="top:3.5rem;">

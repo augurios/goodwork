@@ -1,6 +1,6 @@
 <template>
-<div id="profile-dropdown-container" class="flex items-center cursor-pointer">
-  <div id="profile-dropdown" class="flex flex-row items-center" @click="toggleProfileDropdown" v-click-outside="hideProfileDropdown">
+<div id="profile-dropdown-container" class="flex items-center cursor-pointer" v-click-outside="hideProfileDropdown">
+  <div id="profile-dropdown" class="flex flex-row items-center" @click="toggleProfileDropdown">
     <img class="w-8 h-8 rounded-full" :src="generateUrl(user.avatar)">
   </div>
   <div v-if="currentComponent === 'profile-dropdown'" id="profile-menu" class="absolute bg-white w-48 -ml-32 mr-2 py-1 shadow-lg rounded z-50" style="top:3.5rem;">
