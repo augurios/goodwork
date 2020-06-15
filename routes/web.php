@@ -285,6 +285,10 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::put('services/{service}', [ServiceController::class, 'update']);
 
     Route::get('check-for-update', [AboutController::class, 'checkForUpdate']);
+
+    Route::get('app-settings', [AppSettingController::class, 'index']);
+
+    Route::patch('app-settings/{appSetting}', [AppSettingController::class, 'update']);
 });
 /**********************************
         Link
