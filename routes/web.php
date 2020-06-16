@@ -93,9 +93,15 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('events', [EventController::class, 'index']);
 
+    Route::post('events/pjs', [EventController::class, 'indexPj']);
+
     Route::post('events', [EventController::class, 'store']);
 
     Route::get('events/{event}', [EventController::class, 'index']);
+
+    Route::post('events/update', [EventController::class, 'updateEvent']);
+    
+    Route::delete('events/{event}', [EventController::class, 'delete']);
 });
 
 /**********************************

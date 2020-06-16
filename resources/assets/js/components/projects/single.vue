@@ -97,7 +97,7 @@
       <task-board v-if="settings.task_enabled" resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></task-board>
       <discussion-board v-if="settings.discussion_enabled" resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></discussion-board>
       <messages-board v-if="settings.message_enabled" resourceType="project" :resource="project" :activeTab="active"></messages-board>
-      <event-board v-if="settings.event_enabled" resourceType="project" :resource="project" :activeTab="active"></event-board>
+      <project-calendar v-if="settings.event_enabled" resourceType="project" :resource="project" :activeTab="active"></project-calendar>
       <file-board v-if="settings.file_enabled" resourceType="project" :resource="project" :activeTab="active"></file-board>
       <activity-board resourceType="project" :resourceId="project.id" :activeTab="active"></activity-board>
     </div>
@@ -110,7 +110,7 @@ import { mapState, mapActions } from 'vuex'
 import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
-import eventBoard from './../partials/eventBoard.vue'
+import projectCalendar from './../partials/project-calendar/projectCalendar.vue'
 import fileBoard from './../partials/fileBoard.vue'
 import activityBoard from './../partials/activityBoard.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
@@ -129,7 +129,7 @@ export default {
     taskBoard,
     discussionBoard,
     messagesBoard,
-    eventBoard,
+    projectCalendar,
     fileBoard,
     activityBoard,
     addMemberForm,

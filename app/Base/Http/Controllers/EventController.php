@@ -35,4 +35,40 @@ class EventController extends Controller
             201
         );
     }
+
+    public function indexPj(EventRepository $repository)
+    {
+        $events = $this->repository->getAllFromPj(request('eventable_type'), request('eventable_id'), request('cycle_id'));
+
+        return response()->json([
+            'status' => 'success',
+            'events' => $events,
+        ]);
+    }
+
+    public function updateEvent(EventRepository $repository)
+    {
+
+        $event = $this->repository->updateEvent(request());
+
+        return response()->json([
+            'status'     => 'success',
+            'message'    => localize('misc.The event has been updated'),
+            'event' => $event,
+        ], 201);
+    }
+
+    public function delete($EventD)
+    { 
+        try {  
+            $event = $this->repository->delete($EventD);
+
+            return response()->json([
+                'status'  => 'success',
+                'message' => localize('misc.The event has been deleted'),
+            ]);
+        } catch (Exception $exception) {
+            return $this->errorResponse($exception->getMessage());
+        }
+    }
 }

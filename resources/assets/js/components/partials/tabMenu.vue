@@ -23,11 +23,11 @@
       </span>
       <span class="hidden sm:block font-regular">{{ 'Messages' | localize }}</span>
     </div>
-    <!-- <div v-if="settings.event_enabled" @click="activateThisTab('events')"
+    <div v-if="settings.event_enabled" @click="activateThisTab('events')"
       :class="[(active === 'events') ? 'text-indigo-600 font-semibold border-indigo-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center mr-8 flex justify-center items-center']">
       <font-awesome-icon :icon="faCalendarAlt" class="sm:hidden md:inline mr-2"></font-awesome-icon>
       <span class="hidden sm:block font-regular">{{ 'Events' | localize }}</span>
-    </div> -->
+    </div>
     <div v-if="settings.file_enabled" @click="activateThisTab('files')"
       :class="[(active === 'files') ? 'text-indigo-600 font-semibold border-indigo-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center mr-8 flex justify-center items-center']">
       <font-awesome-icon :icon="faFileAlt" class="sm:hidden md:inline mr-2"></font-awesome-icon>
