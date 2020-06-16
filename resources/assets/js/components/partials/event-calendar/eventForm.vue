@@ -76,8 +76,25 @@
             <input v-model="event.endTime" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="endthour" type="time" />
           </div>
         </div>
+        <div>
+          <label class="text-sm text-gray-600 pr-8" for="endthour">
+               Recurrente?
+          </label>         
+          <div class="relative rounded-full w-12 h-6 transition duration-200 ease-linear mt-2"
+            :class="[event.recurent ? 'bg-green-400' : 'bg-gray-400']">
+            <label for="toggle"
+                  class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer"
+                  :class="[event.recurent ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-400']"></label>
+            <input type="checkbox" id="toggle" name="toggle" v-model="event.recurent"
+                  class="appearance-none w-full h-full active:outline-none focus:outline-none"
+                  />
+          </div>
+        </div>
       </div>
       
+
+
+  
       
       <div class="flex flex-row justify-end pt-6 px-8 bg-gray-100 rounded">
         <button @click="toggleEventForm" class="border border-gray-400 bg-white text-gray-700 font-medium py-2 px-4 mr-4 rounded">Cerrar</button>

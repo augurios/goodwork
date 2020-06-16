@@ -19,6 +19,7 @@ class Calevent extends Model
         'startDate',
         'endDate',
         'posted_by',
+        'recurent',
     ];
 
     /**

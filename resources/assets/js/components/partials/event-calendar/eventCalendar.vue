@@ -53,6 +53,7 @@ const eventTemplate = {
           title: '',
           classes: '',
           url: '',
+          recurent: false,
       }
 
 export default {
@@ -120,12 +121,36 @@ export default {
       this.isLoading = true;
       axios.get('/calevents')
         .then((response) => {
-          this.items = response.data.events
+          let recurrents = [];
+          this.items = response.data.events.map(event => {
+            if(event.recurent) {
+              recurrents.push({...event});
+              event.endDate = event.startDate;
+              return event;
+            } else {
+              return event;
+            }
+          });
+          this.handleRecurents(recurrents);
           this.isLoading = false;
         })
         .catch((error) => {
           console.log(error)
         })
+    },
+    handleRecurents(recurrents) {
+      recurrents.forEach(recEvent => {
+        let ind = 0,
+            start = new Date( recEvent.startDate ),
+            end = new Date( recEvent.endDate );
+        for (start; start < end; start = new Date(start.setMonth(start.getMonth()+1))) {
+          this.items.push({
+            ...recEvent,
+            startDate: start,
+            endDate: start
+          })
+        }
+      })
     },
     toggleEventForm() {
       if(this.eventModalForm) {

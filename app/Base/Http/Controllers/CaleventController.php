@@ -33,6 +33,7 @@ class CaleventController extends Controller
                 'title'         => $request->title,
                 'url'           => $request->url,
                 'classes'       => $request->classes, 
+                'recurent'      => $request->recurent,
                 'startDate'     => formatDate($request->startDate), 
                 'endDate'       => formatDate($request->endDate), 
                 'posted_by'     => auth()->user()->id,
@@ -60,6 +61,7 @@ class CaleventController extends Controller
             'title'         => $request->title,
             'url'           => $request->url,
             'classes'       => $request->classes, 
+            'recurent'      => $request->recurent, 
             'startDate'     => formatDate($request->startDate), 
             'endDate'       => formatDate($request->endDate), 
         ]);

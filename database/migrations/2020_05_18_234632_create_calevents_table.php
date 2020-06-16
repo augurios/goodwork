@@ -18,6 +18,7 @@ class CreateCaleventsTable extends Migration
             $table->string('title');
             $table->string('url')->nullable();
             $table->string('classes')->nullable();
+            $table->boolean('recurent')->default(false);
             $table->dateTime('startDate');
             $table->dateTime('endDate')->nullable();
             $table->integer('posted_by')->unsigned();
