@@ -185,6 +185,7 @@ export default {
   }),
 
   async created () {
+    EventBus.$on('request_tasks', this.remoteCall);
     this.statuses = await this.getAllStatuses()
     this.tasks = await this.getAllTasks(true)
     var id = new URL(location.href).searchParams.get('id')
@@ -198,6 +199,7 @@ export default {
     if (id) {
       this.taskDetailsShown = true
     }
+    
   },
 
   watch: {
@@ -265,7 +267,7 @@ export default {
     },
     async getAllTasks (update = false) {
       try {
-        if (this.activeTab === 'tasks' && (this.tasks.length < 1 || update)) {
+        if ((this.activeTab === 'tasks' || this.activeTab === 'events') && (this.tasks.length < 1 || update)) {
           let { data } = await axios({
             url: '/tasks',
             params: {
@@ -284,6 +286,10 @@ export default {
       } catch (error) {
         console.error(error)
       }
+    },
+    async remoteCall() {
+      const tasks = await this.getAllTasks(true)
+      EventBus.$emit('update_tasks', tasks);
     },
     async getAllStatuses () {
       try {

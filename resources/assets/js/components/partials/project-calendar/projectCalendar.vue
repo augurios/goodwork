@@ -98,9 +98,19 @@ export default {
           ...eventTemplate
       },
       isLoading: true,
+      availTasks: [],
+      timeOut: null,
     };
   },
+  watch: {
+    activeTab: function () {
+      this.loadEvents()
+    },
+  },
   computed: {
+    ...mapState({
+      cycles: state => state.cycle.cycles,
+    }),
     userLocale() {
       return this.getDefaultBrowserLocale;
     },
@@ -112,6 +122,9 @@ export default {
         "theme-default": this.useDefaultTheme,
       };
     },
+  },
+  created() {
+    EventBus.$on('update_tasks', this.handleTasks);
   },
   mounted() {
     this.event.startDate = this.isoYearMonthDay(this.today());
@@ -132,6 +145,7 @@ export default {
     },
     loadEvents() {
       this.isLoading = true;
+      EventBus.$emit('request_tasks', true);
       const payload = {
         'eventable_type': this.resourceType,
         'eventable_id':this.resource.id,
@@ -150,11 +164,53 @@ export default {
               id
             }
           })
+          this.handleCycles();
           this.isLoading = false;
         })
         .catch((error) => {
           console.log(error)
         })
+    },
+    handleCycles() {
+      this.cycles.forEach(cycle => {
+        const {start_date,end_date,name,id,cyclable_id} = cycle;
+        let event = {
+              startDate: this.formatDate(new Date(start_date)),
+              endDate: this.formatDate(new Date(end_date)),
+              title: name,
+              classes: 'cycle',
+              id: id+cyclable_id,
+            }
+        this.items.push({
+          ...event,
+          title: 'Inicio - ' + name,
+          endDate:event.startDate
+        });
+        this.items.push({
+          ...event,
+          title: 'Cierre - ' + name,
+          startDate:event.endDate
+        });
+      });
+    },
+    handleTasks(tasks) {
+      this.availTasks = tasks;
+      if(this.isLoading) {
+        clearTimeout(this.setTimeout);
+        this.setTimeout = setTimeout(()=>{ this.handleTasks(tasks) }, 500);
+      } else {
+        this.availTasks.forEach(task => {
+          const {due_on,name,id} = task;
+          let event = {
+                startDate: due_on,
+                endDate: due_on,
+                title: '!> '+name,
+                classes: 'cycle task',
+                id: id+'t',
+              }
+          this.items.push(event);
+        });
+      }
     },
     toggleEventForm() {
       if(this.eventModalForm) {
@@ -328,5 +384,16 @@ export default {
 }
 .theme-default .cv-event {
   cursor: pointer;
+}
+.theme-default .cv-event.cycle {
+    opacity: 0.7;
+    border-radius: 0;
+    pointer-events: none;
+    font-weight: bold;
+    font-style: italic;
+}
+.theme-default .cv-event.cycle.task {
+    background: #fdff9b;
+    border: 1px solid #ffe000;
 }
 </style>
