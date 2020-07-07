@@ -100,4 +100,6 @@ return [
     'A timeline of acitivities will show up when people starts working' => 'Aparecerá una línea de tiempo de actividades cuando la gente comience a trabajar',
     'Teams'                                                             => 'Equipo',
     'Offices'                                                           => 'Oficinas',
+    'Due Date'                                                          => 'Fecha de entrega',
+    'You do not have permission for this action'                        => 'No tienes permiso para esta accion',
 ];

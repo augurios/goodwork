@@ -23,4 +23,10 @@ return [
     'Forgot Your Password?'                                                       => 'Forgot Your Password?',
     'Send Password Reset Link'                                                    => 'Send Password Reset Link',
     'Reset Password'                                                              => 'Reset Password',
+    'The name field is required.'                                                 => 'El Nombre es Requerido',
+    'The username field is required.'                                             => 'El Nombre de usuario es Requerido',
+    'The location field is required.'                                             => 'El campo de Municipalidad es Requerido',
+    'The designation field is required.'                                          => 'El campo de Puesto es Requerido',
+    'The email field is required.'                                                => 'El correo electronico es Requerido',
+    'The password field is required.'                                             => 'El campo de contraseña es Requerido',
 ];

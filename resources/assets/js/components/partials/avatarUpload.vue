@@ -79,6 +79,8 @@ export default {
         while(n--){
             u8arr[n] = bstr.charCodeAt(n);
         }
+
+      const postDate = new Date().getTime();
       var newFile = new File([u8arr], this.user.username, {lastModified: new Date()})
       return newFile;
     },

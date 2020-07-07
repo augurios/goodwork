@@ -70,7 +70,7 @@
       <div class="bg-white p-8">
         <p class="text-center mb-4">&iexcl;Informaci&oacute;n importante!</p>
         <p class="mb-4"><strong>AdMuni</strong> es una aplicaci&oacute;n para colaboraci&oacute;n laboral entre gobiernos locales. Actualmente en desarrollo, las caracteristicas y funcionalidades actuales podrian cambiar, la informacion agregada a esta version no sera restaurada.</p>
-        <p class="mb-4">Para reportar errores o enviar sugerencias puede crear una tarea en el proyecto "<a href="/?group_type=project&group_id=2&tool=tasks" class="text-indigo-700">Admuni desarrollo</a>"</p>
+        <p class="mb-4">Para reportar errores o enviar sugerencias puede agregar un comentario en la tarea respectiva en el proyecto "<a href="/?group_type=project&group_id=2&tool=tasks" class="text-indigo-700">Admuni desarrollo</a>"</p>
         <p class="mb-4">Cualquier duda puede enviar un mensaje al usuario "Admin".</p>
         <p>&nbsp;&nbsp;</p>
       </div>

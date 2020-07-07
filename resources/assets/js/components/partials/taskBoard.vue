@@ -91,7 +91,7 @@
     <div v-for="(tasks, name) in groupedTasks">
       <div class="pb-2 flex items-center font-semibold">
         <span class="pr-1 text-gray-600">
-          {{ name }}
+           {{ name | localize }}
         </span>
         <span class="text-sm">
           ({{ tasks.length }})

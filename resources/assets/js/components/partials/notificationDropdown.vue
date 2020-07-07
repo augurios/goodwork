@@ -13,10 +13,10 @@
         <div class="w-56">
           <div class="py-1 text-sm">
             <a :href="'/users/' + notification.data.subject.username" class="no-underline hover:underline text-blue-400">{{ notification.data.subject.name }}</a>
-            {{ notification.data.action }}
+            {{ notification.data.action | localize  }}
             <a v-if="notification.data.url" :href="notification.data.url" class="no-underline hover:underline text-blue-400">{{ notification.data.object_name }}</a>
             <a v-else class="no-underline text-blue-400">{{ notification.data.object_name }}</a>
-            {{ notification.data.task_status }}
+            {{ notification.data.task_status  | localize  }}
           </div>
           <div class="py-1 text-xs">
             {{ notification.date }}

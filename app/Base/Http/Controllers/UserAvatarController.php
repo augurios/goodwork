@@ -10,7 +10,7 @@ class UserAvatarController extends Controller
     {
         try {
             auth()->user()->update([
-                'avatar' => $request->file('avatar')->storeAs('avatars', $request->user()->username . '.png', ['disk' => 'public']),
+                'avatar' => $request->file('avatar')->storeAs('avatars', $request->user()->username . time() . '.png', ['disk' => 'public']),
             ]);
 
             return response()->json([

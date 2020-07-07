@@ -1,6 +1,6 @@
 <template>
-<div class="relative bg-white shadow-lg w-full sm:w-64 md:w-80 h-48 sm:mx-4 md:mx-12 lg:mx-4 flex flex-col justify-center items-center rounded-lg m-3 xl:mx-10 md:my-8">
-  <div class="w-full p-4 h-32 flex flex-col items-start">
+<div class="relative bg-white shadow-lg w-full sm:w-64 md:w-80 h-64 sm:mx-4 md:mx-12 lg:mx-4 flex flex-col justify-center items-center rounded-lg m-3 xl:mx-10 md:my-8">
+  <div class="w-full p-4 h-48 flex flex-col items-start">
     <div @click="showProject(project.id)" class="text-pink-500 text-2xl no-underline cursor-pointer">{{ project.name }}</div>
     <span class="text-gray-500 text-sm self-start">{{ project.description }}</span>
   </div>
